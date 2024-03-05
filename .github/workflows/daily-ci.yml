@@ -16,5 +16,11 @@ jobs:
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
      
-      - name: build image
-        run: ./build_image.sh
+      - name: Run SQS Security Container
+        run: |
+          docker run \
+            -e AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID }}" \
+            -e AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
+            -e LOG_MODE="${{ secrets.LOG_MODE }}" \
+            -e S3_BUCKET_NAME="${{ secrets.S3_BUCKET_NAME }}" \
+            aviv012/sqs_security:latest
