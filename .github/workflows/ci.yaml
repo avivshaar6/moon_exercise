@@ -1,0 +1,13 @@
+name: ci_sqs_security
+on:
+  push:
+    branches:
+      - main
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker-practice/actions-setup-docker@master
+        timeout-minutes: 12
+      - run: ./build_image.sh
