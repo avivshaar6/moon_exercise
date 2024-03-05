@@ -1,4 +1,4 @@
-name: Daily Docker Job
+name: ci_sqs_security_daily_docker_job
 
 on:
   schedule:
